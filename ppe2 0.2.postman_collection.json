@@ -1,0 +1,851 @@
+{
+	"info": {
+		"_postman_id": "4972492b-d734-4abc-874d-e99dca82de4e",
+		"name": "ppe2 0.2",
+		"description": "# Documentation de l'API du PPE2 - POMMADAM\nl'Api a pour fonction la gestion de la base de données MongoDb et le traitement des requêtes HTTP\n\n",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "ppe2 user inscription",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"description": "JWT + token",
+								"key": "Authorization",
+								"type": "text",
+								"value": "JWT token"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "nom",
+									"description": "nom",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "nom@email.net",
+									"description": "email",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "leMotDePasse",
+									"description": "mot de passe",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "5c95185b59d9841f3cd6c89c",
+									"description": "_id du rôle",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/auth/register",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						},
+						"description": "Action: Inscription des nouveaux utilisateurs\nRetour: l'utilisateur créé\nQuery params: aucun\nBody params:\n\tname: nom de l'utilisateur\n\temail: email de l'utilisateur\n\tpassword: mot de passe de l'utilisateur\n\trole: _id du rôle du futur utilisateur\nAutorisation nécessaire: oui\nRôle minimum nécessaire: Adminisrateur"
+					},
+					"response": []
+				},
+				{
+					"name": "ppe2 user connexion",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "alex@google.com",
+									"description": "Email",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "motdepass",
+									"description": "Mot de passe",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/auth/sign_in",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"auth",
+								"sign_in"
+							]
+						},
+						"description": "Action: Connexion de l'utilisateur\nRetour: Token à utiliser dans toutes les futurs requêtes qui ont \tbesoin d'une autorisation\nQuery params: aucun\nBody params:\n\temail: email de l'utilisateur\n\tpassword: mot de passe de l'utilisateur\nAutorisation nécessaire: non\nRôle minimum nécessaire: Aucun"
+					},
+					"response": []
+				},
+				{
+					"name": "ppe2 users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/users",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users"
+							]
+						},
+						"description": "Action: Liste les utilisateurs\nRetour: Les utilisateurs et leur rôle\nQuery params: aucun\nBody params: aucun\nAutorisation nécessaire: non\nRôle minimum nécessaire: aucun"
+					},
+					"response": []
+				},
+				{
+					"name": "ppe2 user by email",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/users/:email",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								":email"
+							],
+							"variable": [
+								{
+									"key": "email",
+									"value": "utilisateur@email.net",
+									"description": "Email d'un utilisateur"
+								}
+							]
+						},
+						"description": "Action: Retourne l'utilisateur qui possede l'email en paramètre\nRetour: Un utilisateur et son rôle\nQuery params: email\nBody params: aucun\nAutorisation nécessaire: non\nRôle minimum nécessaire: aucun"
+					},
+					"response": []
+				},
+				{
+					"name": "ppe2 user edit by id",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "JWT token"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "utilisateur@pom.fr",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/users/:userId",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "_id de l'utilisateur"
+								}
+							]
+						},
+						"description": "Action: Modifie un utilisateur\nRetour: l'utilisateur modifier\nQuery params: _id de l'utilisateur à modifier\nBody params: le ou les modification\nAutorisation nécessaire: oui\nRôle minimum nécessaire: Adminisrateur"
+					},
+					"response": []
+				},
+				{
+					"name": "test option",
+					"request": {
+						"method": "OPTIONS",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/auth/sign_in",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"auth",
+								"sign_in"
+							]
+						},
+						"description": "Action: Test CORS"
+					},
+					"response": []
+				}
+			],
+			"description": "Gestion et Autentification des utilisateur",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "d4f9f813-7490-40fa-82c1-c331525b9931",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "5bc4d040-e2cb-47a6-a1d6-054ff82eed30",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "vehicle",
+			"item": [
+				{
+					"name": "ppe2 vehicule",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "JWT token",
+								"description": "JWT + token",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "registration",
+									"value": "AA-4-AA",
+									"description": "Immatriculation",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "clio",
+									"description": "Description",
+									"type": "text"
+								},
+								{
+									"key": "disable",
+									"value": "false",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "energy",
+									"value": "essence",
+									"description": "Energie",
+									"type": "text"
+								},
+								{
+									"key": "range",
+									"value": "600",
+									"description": "Autonomie",
+									"type": "text"
+								},
+								{
+									"key": "place",
+									"value": "5",
+									"description": "Nombre de places",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "5c90f9af8e19cc4fa4f05b1c",
+									"description": "_id de la catégorie",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/vehicles",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"vehicles"
+							]
+						},
+						"description": "Action: Ajoute un véhicule\nRetour: Le véhicule créé\nQuery params: aucun\nBody params:\n\tregistration: immatriculation\n\tdescription: description\n\tenergy: énergie (électrique/essence/diesel/...)\n\trange: autonomie\n\tplace: nombre de places\n\tcategory: _id de la categorie\nAutorisation nécessaire: oui\nRôle minimum nécessaire: Adminisrateur"
+					},
+					"response": []
+				},
+				{
+					"name": "ppe2 vehicule affiche",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/vehicles",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"vehicles"
+							]
+						},
+						"description": "Action: Liste les véhicules\nRetour: Tous les véhicules\nQuery params: aucun\nBody params: aucun\nAutorisation nécessaire: non\nRôle minimum nécessaire: aucun"
+					},
+					"response": []
+				},
+				{
+					"name": "ppe2 vehicles getById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/vehicles/:_id",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"vehicles",
+								":_id"
+							],
+							"variable": [
+								{
+									"key": "_id",
+									"value": "",
+									"description": "_id d'un véhicule"
+								}
+							]
+						},
+						"description": "Action: Retourne le véhicule qui possede l'_id correspondant\nRetour: Un véhicule\nQuery params: _id d'un véhicule\nBody params: aucun\nAutorisation nécessaire: non\nRôle minimum nécessaire: aucun"
+					},
+					"response": []
+				},
+				{
+					"name": "ppe2 vehicule",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "JTW ",
+								"description": "JWT + token",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "description",
+									"value": "camion",
+									"description": "nouvelle description du véhicule",
+									"type": "text"
+								},
+								{
+									"key": "registration",
+									"value": "aa-6-aa",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "range",
+									"value": "1700",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "place",
+									"value": "3",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/vehicles/:_id",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"vehicles",
+								":_id"
+							],
+							"variable": [
+								{
+									"key": "_id",
+									"value": "",
+									"description": "_id d'un véhicule"
+								}
+							]
+						},
+						"description": "Action: Modifie un véhicule\nRetour: Le véhicule modifié\nQuery params: _id du véhicule à modifier\nBody params: Les modifications\nAutorisation nécessaire: oui\nRôle minimum nécessaire: Adminisrateur"
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "c2ae70af-6e6f-45be-bb8b-2e9dcff5ef82",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "4dc05ae2-4592-46ae-8a06-7549271ff996",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "category",
+			"item": [
+				{
+					"name": "ppe2 categories ",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "JWT ",
+								"description": "JWT + token",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "citadine",
+									"description": "nom de la nouvelle catégorie",
+									"type": "text"
+								},
+								{
+									"key": "_id",
+									"value": "5c90f9af8e19cc4fa4f05b1c",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/categories",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"categories"
+							]
+						},
+						"description": "Action: Ajoute une catégorie\nRetour: La catégorie ajouté\nQuery params: aucun\nBody params:\n\tname: nom de la nouvelle catégorie\nAutorisation nécessaire: oui\nRôle minimum nécessaire: Adminisrateur"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "role",
+			"item": [
+				{
+					"name": "ppe2 role",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "JWT ",
+								"description": "JWT + token",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "utilisateur",
+									"description": "nom du nouveau rôle",
+									"type": "text"
+								},
+								{
+									"key": "_id",
+									"value": "5c95185b59d9841f3cd6c89c",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/roles",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"roles"
+							]
+						},
+						"description": "Action: Ajoute un nouveau rôle\nRetour: Le rôle créé\nQuery params: aucun\nBody params:\n\tname: nom du rôle\nAutorisation nécessaire: oui\nRôle minimum nécessaire: Adminisrateur"
+					},
+					"response": []
+				},
+				{
+					"name": "ppe2 roles affiche",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/roles",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"roles"
+							]
+						},
+						"description": "Action: Retourne la liste des rôles\nRetour: Tous les rôles\nQuery params: aucun\nBody params: aucun\nAutorisation nécessaire: non\nRôle minimum nécessaire: aucun"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "usage",
+			"item": [
+				{
+					"name": "ppe2 usages affiche",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/usages",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"usages"
+							]
+						},
+						"description": "Action: Liste les réservations\nRetour: Tous les réservations\nQuery params: aucun\nBody params: aucun\nAutorisation nécessaire: non\nRôle minimum nécessaire: aucun"
+					},
+					"response": []
+				},
+				{
+					"name": "ppe2 usages add",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT ",
+								"description": "JWT + token",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "start",
+									"value": "2019-05-19 8:00:00",
+									"description": "Début de la réservation",
+									"type": "text"
+								},
+								{
+									"key": "end",
+									"value": "2019-05-19 22:00:00",
+									"description": "Fin de la réservation",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Description",
+									"description": "Description",
+									"type": "text"
+								},
+								{
+									"key": "purpose",
+									"value": "l'objet",
+									"description": "Objet",
+									"type": "text"
+								},
+								{
+									"key": "vehicle",
+									"value": "",
+									"description": "_id du véhicule",
+									"type": "text"
+								},
+								{
+									"key": "user",
+									"value": "",
+									"description": "_id de l'utilisateur",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/usages",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"usages"
+							]
+						},
+						"description": "Action: Ajout d'une nouvelle réservation\nRetour: La réservation créé\nQuery params: aucun\nBody params:\n\tstart: Début de la réservation\n\tend: Fin de la réservation\n\tdescription: Description de la réservation (destination...)\n\tpurpose: Objet de la réservation\n\tvehicle: _id d'un véhicule\n\tuser: _id d'un utilisateur\nAutorisation nécessaire: oui\nRôle minimum nécessaire: Utilisateur"
+					},
+					"response": []
+				},
+				{
+					"name": "ppe2 usages vehicles available",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/usages/available/:start/:end",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"usages",
+								"available",
+								":start",
+								":end"
+							],
+							"variable": [
+								{
+									"key": "start",
+									"value": "2019-04-17 06:04:00",
+									"description": "Début de la plage"
+								},
+								{
+									"key": "end",
+									"value": "2019-04-17 20:04:00",
+									"description": "Fin de la plage"
+								}
+							]
+						},
+						"description": "Action: Liste les véhicules disponible dans une plage\nRetour: Liste de véhicules\nQuery params:\n\tstart: Début de la plage\n\tend: Fin de la plage\nBody params: aucun\nAutorisation nécessaire: non\nRôle minimum nécessaire: aucun"
+					},
+					"response": []
+				},
+				{
+					"name": "ppe2 usage futur",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/usages/now",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"usages",
+								"now"
+							]
+						},
+						"description": "Action: Liste les réservations futur\nRetour: Liste de réservations\nQuery params: aucun\nBody params: aucun\nAutorisation nécessaire: non\nRôle minimum nécessaire: aucun"
+					},
+					"response": []
+				},
+				{
+					"name": "ppe2 usages update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "JWT",
+								"description": "JWT + token",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "description",
+									"value": "une description",
+									"description": "nouvelle description",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/usages/:_id",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"usages",
+								":_id"
+							],
+							"variable": [
+								{
+									"key": "_id",
+									"value": "",
+									"description": "_id de la reservation"
+								}
+							]
+						},
+						"description": "Action: Modifie une réservation\nRetour: La réservation modifié\nQuery params: _id d'une réservation\nBody params: Les modifications\nAutorisation nécessaire: oui\nRôle minimum nécessaire: Adminisrateur"
+					},
+					"response": []
+				},
+				{
+					"name": "ppe2 usages delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/usages/:_id",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"usages",
+								":_id"
+							],
+							"variable": [
+								{
+									"key": "_id",
+									"value": "",
+									"description": "_id d'une réservation"
+								}
+							]
+						},
+						"description": "Action: Supprime une réservation\nRetour: Confirmation de suppression\nQuery params: _id d'une réservation\nBody params: aucun\nAutorisation nécessaire: oui\nRôle minimum nécessaire: Utilisateur"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "55bb8e45-102e-41c0-959f-c5d5943be531",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "e081fe8d-7980-410c-9ee7-f97df52f31d1",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
