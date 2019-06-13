@@ -27,10 +27,5 @@ Pour importer les données dans MongoDb:
 
     mongoimport --db ppe5 --file /path/to/data/fileExport.json
 ## Utilisation
-[Lien vers la documentation](https://documenter.getpostman.com/view/6975234/S1M3w5ci?version=latest)
-
-Test effectués avec l'application [Postman](https://www.getpostman.com/)
 
 Une fois Postman installé, le fichier `ppe2 0.2.postman_collection.json` permet l'import de l'environnement de test dans postman.
-
-Il est aussi possible de l'importer via la documentation grace au boutton `Run in Postman` (en haut à droite).
