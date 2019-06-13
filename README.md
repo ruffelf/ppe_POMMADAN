@@ -20,7 +20,7 @@ Sur Debian 9
 ## Installation
 Dans le dossier `Home` faire:
     
-    git clone https://github.com/N4n3x/ppe2Api.git
+    git clone https://github.com/ruffelf/ppe2Api.git
     cd ppe2Api
     npm install
 Pour importer les données dans MongoDb:
